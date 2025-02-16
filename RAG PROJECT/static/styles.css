@@ -1,0 +1,462 @@
+:root {
+    --primary-color: #4a4fdf;
+    --secondary-color: #45aaf2;
+    --background-light: #ffffff;
+    --text-light: #333333;
+    --background-dark: #1a1a2e;
+    --text-dark: #ffffff;
+    --sidebar-width: 250px; /* Adjust as needed */
+    --tooltip-bg-color: #202123; /* Dark background for tooltips */
+    --tooltip-text-color: #fff; /* White text for tooltips */
+    --tooltip-font-size: 0.9rem;
+    --tooltip-padding: 6px 10px;
+    --tooltip-border-radius: 4px;
+    --tooltip-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-light);
+    color: var(--text-light);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: #f8f9fa;
+    border-right: 1px solid #e9ecef;
+    padding: 1rem;
+    transition: transform 0.3s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 10; /* Ensure it's above other content */
+    overflow-y: auto; /* Always allow vertical scrolling */
+}
+
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-top: 2rem; /* Added margin-top */
+}
+
+/* Button to toggle the sidebar */
+.sidebar-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute; 
+    left: 10px;
+    top: 10px;
+    z-index: 100;
+}
+
+/* Sidebar toggle button hover effect */
+.sidebar-toggle-btn:hover {
+    color: var(--secondary-color);
+}
+
+.sidebar-toggle-btn i {
+    margin-right: 0; 
+}
+
+/* Tooltip for sidebar toggle */
+.sidebar-toggle-btn::after {
+    content: attr(aria-label); /* Use aria-label as tooltip text */
+    position: absolute;
+    background-color: var(--tooltip-bg-color);
+    color: var(--tooltip-text-color);
+    font-size: var(--tooltip-font-size);
+    padding: var(--tooltip-padding);
+    border-radius: var(--tooltip-border-radius);
+    box-shadow: var(--tooltip-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    white-space: nowrap;
+    z-index: 20;
+    /* Position to the right of the icon */
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sidebar-toggle-btn:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dark-mode .sidebar {
+    background-color: #16213e;
+    border-right-color: #1f2940;
+}
+
+.panel-section {
+    margin-bottom: 2rem;
+}
+
+.panel-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+#chat-history, #source-documents {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#chat-history li, #source-documents li {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(74, 79, 223, 0.1);
+    border-radius: 0.3rem;
+    overflow-wrap: break-word;
+}
+
+.dark-mode #chat-history li, .dark-mode #source-documents li {
+    background-color: rgba(74, 79, 223, 0.2);
+}
+
+/* Chat area styles */
+.chat-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--sidebar-width); /* Make space for the sidebar */
+    transition: margin-left 0.3s ease-in-out, max-width 0.3s ease-in-out; /* Add max-width to transition */
+}
+
+.chat-area.sidebar-collapsed {
+    margin-left: 0;
+}
+
+.chat-header {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.dark-mode .theme-toggle-btn {
+    color: var(--text-dark);
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    max-width: 80%;
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+}
+
+.message-content {
+    margin-left: 10px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #f0f0f0;
+    color: var(--text-light);
+}
+
+.dark-mode .bot-message {
+    background-color: #2a2a3e;
+    color: var(--text-dark);
+}
+
+.profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chat-input-form {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center; 
+    position: sticky; 
+    bottom: 0; 
+    background-color: var(--background-light); 
+    padding: 1rem;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dark-mode .chat-input-form {
+    background-color: var(--background-dark); 
+}
+
+#user-input {
+    flex-grow: 1;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    font-size: 1rem;
+}
+
+/* Tooltip for user input */
+#user-input:focus::placeholder {
+    color: transparent; /* Hide placeholder text on focus */
+}
+
+#user-input:focus + .user-input-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.user-input-tooltip {
+    position: absolute;
+    background-color: var(--tooltip-bg-color);
+    color: var(--tooltip-text-color);
+    font-size: var(--tooltip-font-size);
+    padding: var(--tooltip-padding);
+    border-radius: var(--tooltip-border-radius);
+    box-shadow: var(--tooltip-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    white-space: nowrap;
+    z-index: 20;
+    top: -40px; /* Adjust position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.file-input-wrapper {
+    display: flex; 
+    align-items: center; 
+    position: relative;
+    overflow: hidden;
+    margin-right: 0.5rem;
+}
+
+#file-input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-input-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* For tooltip positioning */
+}
+
+.file-input-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.upload-icon-wrapper {
+    display: block;
+}
+
+/* File name display */
+#file-name {
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    position: relative; /* For tooltip positioning */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dark-mode #file-name {
+    color: var(--text-dark);
+}
+
+.send-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.loading-bar-container {
+    width: 100%;
+    background-color: #e0e0e0; /* Light grey background for the container */
+    border-radius: 5px; /* Rounded corners for the container */
+    overflow: hidden; /* Hide the bar when it overflows its container */
+}
+
+.loading-bar {
+    width: 0%;
+    height: 5px;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease-in-out;
+}
+
+/* New styles for "Thought for x seconds" */
+.thought-time {
+    color: var(--text-light); 
+    font-size: 0.8rem; 
+    margin-bottom: 0.5rem; /* Add some spacing below */
+}
+
+.dark-mode .thought-time {
+    color: var(--text-dark); 
+}
+
+/* New styles for the loading circle */
+.loading-circle {
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        transform: translateX(calc(-1 * 100%)); /* Initially hide the sidebar */
+    }
+
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+        box-shadow: none; /* Remove shadow when collapsed on small screens */
+    }
+
+    /* Adjust sidebar toggle button position when collapsed on small screens */
+    .sidebar-toggle-btn {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
+        z-index: 11 !important; /* Ensure it's above the collapsed sidebar */
+        opacity: 0 !important;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .sidebar.collapsed .sidebar-toggle-btn {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .sidebar-toggle-btn i {
+        margin-right: 0; /* Remove margin when icon is on the left */
+    }
+
+    .chat-area {
+        max-width: 100% !important;
+        margin-left: 0;
+    }
+
+    .chat-area.sidebar-collapsed {
+        margin-left: 0; /* No margin when sidebar is hidden */
+    }
+
+    .file-input-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        margin-right: 0.5rem;
+        margin-top: 5px; 
+    }
+    
+    .file-input-button {
+        display: block;
+        text-align: center;
+    }
+
+    .chat-input-form {
+        flex-wrap: wrap;
+        max-width: calc(100% - 0.5rem);
+    }
+
+    #user-input {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .send-btn {
+        width: 100%;
+        border-radius: 2rem;
+    }
+}
