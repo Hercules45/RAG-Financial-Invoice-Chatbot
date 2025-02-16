@@ -24,7 +24,7 @@
 
 Here's a short demonstration of the chatbot in action:
 
-![Chatbot Demo](https://github.com/Hercules45/RAG-Financial-Invoice-Chatbot/blob/main/RAG%20PROJECT/assets/chatbot_demo.gif)
+![Chatbot Demo](RAG%20PROJECT/assets/chatbot_demo.gif)
 
 ## Requirements
 
@@ -37,8 +37,8 @@ Here's a short demonstration of the chatbot in action:
 1.  **Clone the Repository:**
 
     ```bash
-    git clone <your_repository_url>
-    cd <your_repository_directory>
+    git clone https://github.com/Hercules45/RAG-Financial-Invoice-Chatbot.git
+    cd RAG-Financial-Invoice-Chatbot/RAG\ PROJECT
     ```
 
 2.  **Install Tesseract OCR (External Dependency):**
@@ -65,28 +65,24 @@ Here's a short demonstration of the chatbot in action:
 
     *   Obtain a Google API key.
     *   **Recommended Method (Using .env):**
-        *   Create a file named `.env` in the project's root directory.
+        *   Create a file named `.env` in the `RAG PROJECT` directory.
         *   Add the following line to the `.env` file, replacing `your-api-key` with your actual key:
 
             ```
             GOOGLE_API_KEY=your-api-key
             ```
-
-        
+        *   **Important:** Add `.env` to your `.gitignore` file to prevent your API key from being committed to the repository.  Create a `.gitignore` file in the `RAG-Financial-Invoice-Chatbot` directory (if one doesn't already exist) and add the following lines:
+            ```
+            .env
+            venv/
+            uploads/
+            ```
 
 ## Running the Application
 
-1.  **Navigate to the Project Directory:**
-
-    ```bash
-    cd "RAG PROJECT"  # Or the name of your project directory
-    ```
-
-2.  **Run the Application:**
-
-    ```bash
-    python app.py
-    ```
+```bash
+python app.py
+```
 
 The application will be available at `http://127.0.0.1:5000/` in your web browser.
 
