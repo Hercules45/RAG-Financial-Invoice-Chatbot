@@ -20,6 +20,12 @@
 *   **File and ChromaDB cleanup:** Cleans up uploaded files and ChromaDB collections after 24 hours.
 *   **Responsive Design:** Adapts the layout for optimal viewing on different screen sizes (desktop, mobile).
 
+## Demo
+
+Here's a short demonstration of the chatbot in action:
+
+![Chatbot Demo](assets/chatbot_demo.gif)
+
 ## Requirements
 
 *   **Python 3.7+**
@@ -66,10 +72,43 @@
             GOOGLE_API_KEY=your-api-key
             ```
 
-        *   **Important:**  *Do not* commit your `.env` file to version control (add it to your `.gitignore`).
-
+        
 
 ## Running the Application
 
-```bash
-python app.py
+1.  **Navigate to the Project Directory:**
+
+    ```bash
+    cd "RAG PROJECT"  # Or the name of your project directory
+    ```
+
+2.  **Run the Application:**
+
+    ```bash
+    python app.py
+    ```
+
+The application will be available at `http://127.0.0.1:5000/` in your web browser.
+
+## Usage
+
+1.  **Upload an Invoice:** Click the upload button (paperclip icon) and select your invoice file.
+2.  **Wait for Processing:** A loading bar will indicate the progress.  The application extracts text, creates embeddings, and initializes the LLM.  The `chroma_db` directory will be created inside `uploads` during this process.
+3.  **Ask Questions:** Once processing is complete, type your questions about the invoice in the chat input box and press Enter.
+4.  **View Source Documents:** The sidebar displays snippets from the source document that are relevant to the chatbot's answer.  You can collapse the sidebar for more chat space.
+
+## Project Structure
+
+*   **`app.py`:** The main Flask application file (backend logic).
+*   **`static/`:**  Contains static assets.
+    *   **`styles.css`:**  CSS stylesheet.
+    *   **`script.js`:**  JavaScript code for frontend interactions.
+    *   **`user-avatar.png`:** Placeholder image for user avatars.
+    *   **`ai-avatar.png`:** Placeholder image for AI avatars.
+*   **`templates/`:**  Contains HTML templates.
+    *   **`index.html`:** The main HTML template for the chatbot interface.
+*   **`uploads/`:**  Temporary storage for uploaded files (files are deleted after 24 hours).  **Note:** The `chroma_db` directory is created *inside* this `uploads` directory dynamically when a file is processed.
+*   **`assets/`:** Contains assets such as images and GIFs.
+*   **`requirements.txt`:**  Lists the required Python dependencies.
+*   **`.env`:** (Not provided, but highly recommended) Stores environment variables (e.g., your Google API key).
+
