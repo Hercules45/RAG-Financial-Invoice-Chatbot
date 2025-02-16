@@ -24,7 +24,7 @@
 
 Here's a short demonstration of the chatbot in action:
 
-![Chatbot Demo](assets/chatbot_demo.gif)
+![Chatbot Demo](https://github.com/Hercules45/RAG-Financial-Invoice-Chatbot/blob/main/RAG%20PROJECT/assets/chatbot_demo.gif)
 
 ## Requirements
 
