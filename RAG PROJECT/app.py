@@ -121,7 +121,7 @@ def initialize_qa_system(filename):
             # Initialize embeddings 
             embeddings = GoogleGenerativeAIEmbeddings(
                 model='models/text-embedding-004',
-                google_api_key='AIzaSyAzoCrYcqzqpjHpF4nJuR6spNzKAd8JAX8',  
+                google_api_key='your-api-key',  
                 task_type="retrieval_query",
                 timeout=120  # Set timeout to 120 seconds
             )
@@ -164,7 +164,7 @@ def initialize_qa_system(filename):
             # Initialize chat model
             chat_model = ChatGoogleGenerativeAI(
                 model="gemini-1.5-flash",
-                google_api_key='AIzaSyAzoCrYcqzqpjHpF4nJuR6spNzKAd8JAX8',  
+                google_api_key='your-api-key',  
                 temperature=0.7,
                 safety_settings=safety_settings
             )
