@@ -4,9 +4,9 @@
 
 ## Features
 
-*   **Multiple File Formats:** Supports uploading `.txt`, `.csv`, `.xlsx`, `.xls`, `.pdf`, `.jpg`, `.jpeg`, and `.png` files.
+*   **Multiple File Formats:** Supports uploading `.txt`, `.csv`, `.xlsx`, `.xls`, `.pdf`, `.doc`, `.docx`, `.jpg`, `.jpeg`, and `.png` files.
 *   **Automated OCR:** Performs Optical Character Recognition (OCR) on image files (JPEG, PNG) to extract text.
-*   **Flexible Document Loading:** Uses Langchain's document loaders (`TextLoader`, `CSVLoader`, `UnstructuredExcelLoader`, `PyPDFLoader`) to handle different file types.
+*   **Flexible Document Loading:** Uses Langchain's document loaders (`TextLoader`, `CSVLoader`, `UnstructuredExcelLoader`, `UnstructuredWordDocumentLoader`, `PyPDFLoader`) to handle different file types.
 *   **Intelligent Text Splitting:** Employs `RecursiveCharacterTextSplitter` to divide documents into manageable chunks for the LLM, respecting sentence and paragraph boundaries.
 *   **Vector Database (ChromaDB):** Stores document embeddings in a ChromaDB vector database for efficient similarity search and context retrieval.
 *   **MultiQuery Retrieval:** Uses Langchain's `MultiQueryRetriever` to generate multiple queries from the user's input, improving retrieval accuracy and providing more comprehensive results.
@@ -18,13 +18,14 @@
 *   **Dark Mode Support:** Includes a toggle to switch between light and dark themes.
 *   **Collapsible Sidebar:** Features a sidebar to display chat history and source documents, which can be collapsed to maximize chat space.
 *   **File and ChromaDB cleanup:** Cleans up uploaded files and ChromaDB collections after 24 hours.
-*   **Responsive Design:** Adapts the layout for optimal viewing on different screen sizes (desktop, mobile).
+  
 
 ## Demo
 
 Here's a short demonstration of the chatbot in action:
 
 ![Chatbot Demo](RAG%20PROJECT/assets/chatbot_demo.gif)
+
 
 ## Requirements
 
@@ -78,6 +79,7 @@ Here's a short demonstration of the chatbot in action:
             uploads/
             ```
 
+
 ## Running the Application
 
 ```bash
@@ -86,12 +88,14 @@ python app.py
 
 The application will be available at `http://127.0.0.1:5000/` in your web browser.
 
+
 ## Usage
 
 1.  **Upload an Invoice:** Click the upload button (paperclip icon) and select your invoice file.
 2.  **Wait for Processing:** A loading bar will indicate the progress.  The application extracts text, creates embeddings, and initializes the LLM.  The `chroma_db` directory will be created inside `uploads` during this process.
 3.  **Ask Questions:** Once processing is complete, type your questions about the invoice in the chat input box and press Enter.
 4.  **View Source Documents:** The sidebar displays snippets from the source document that are relevant to the chatbot's answer.  You can collapse the sidebar for more chat space.
+
 
 ## Project Structure
 
