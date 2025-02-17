@@ -3,7 +3,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.document_loaders import PyPDFLoader, TextLoader, CSVLoader, UnstructuredExcelLoader
+from langchain_community.document_loaders import PyPDFLoader, TextLoader, CSVLoader, UnstructuredExcelLoader,UnstructuredWordDocumentLoader
 from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from google.generativeai.types.safety_types import HarmBlockThreshold, HarmCategory
@@ -94,6 +94,8 @@ def initialize_qa_system(filename):
                     loader = UnstructuredExcelLoader(file_path)
                 elif file_ext == '.pdf':
                     loader = PyPDFLoader(file_path)
+                elif file_ext in ['.docx', '.doc']: 
+                    loader = UnstructuredWordDocumentLoader(file_path)
                 else:
                     raise ValueError(f"Unsupported file type: {file_ext}")
 
@@ -284,7 +286,7 @@ def index():
                 return jsonify({"bot_response": "The QA system is not initialized yet. Please wait for the file to be processed.", "source_documents": []})
 
             try:
-                # Use invoke() instead of __call__
+                
                 response = qa_chain.invoke({"query": user_question})
                 return jsonify({
                     "bot_response": response['result'],
