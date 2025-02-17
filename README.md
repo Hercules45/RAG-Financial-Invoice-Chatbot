@@ -110,5 +110,5 @@ The application will be available at `http://127.0.0.1:5000/` in your web browse
 *   **`uploads/`:**  Temporary storage for uploaded files (files are deleted after 24 hours).  **Note:** The `chroma_db` directory is created *inside* this `uploads` directory dynamically when a file is processed.
 *   **`assets/`:** Contains assets such as images and GIFs.
 *   **`requirements.txt`:**  Lists the required Python dependencies.
-*   **`.env`:** (Not provided, but highly recommended) Stores environment variables (e.g., your Google API key).
+*   **`.env`:** (Not provided here, but highly recommended) Stores environment variables (e.g., your Google API key).
 
