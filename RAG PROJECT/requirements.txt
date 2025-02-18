@@ -11,3 +11,5 @@ openpyxl
 tabulate
 python-magic-bin
 tiktoken
+gunicorn
+schedule
