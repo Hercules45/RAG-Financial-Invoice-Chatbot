@@ -17,6 +17,11 @@ import uuid
 import threading
 import time
 import shutil
+import schedule
+
+from dotenv import load_dotenv
+load_dotenv()
+
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -123,7 +128,7 @@ def initialize_qa_system(filename):
             # Initialize embeddings 
             embeddings = GoogleGenerativeAIEmbeddings(
                 model='models/text-embedding-004',
-                google_api_key='your-api-key',  
+                google_api_key=os.environ.get('GOOGLE_API_KEY'),
                 task_type="retrieval_query",
                 timeout=120  # Set timeout to 120 seconds
             )
@@ -166,7 +171,7 @@ def initialize_qa_system(filename):
             # Initialize chat model
             chat_model = ChatGoogleGenerativeAI(
                 model="gemini-1.5-flash",
-                google_api_key='your-api-key',  
+                google_api_key=os.environ.get('GOOGLE_API_KEY'),
                 temperature=0.7,
                 safety_settings=safety_settings
             )
@@ -306,7 +311,25 @@ def send_static(path):
 def test():
     return jsonify({"message": "Test successful"}), 200
 
+# --- Scheduler Thread ---
+def run_scheduled_jobs():
+    while True:
+        schedule.run_pending()
+        time.sleep(60)  # Check every minute
+
+# Define scheduled tasks (every 24 hours)
+schedule.every(24).hours.do(cleanup_uploads)
+schedule.every(24).hours.do(cleanup_chroma_db)
+
+# Start the scheduler thread in the background
+scheduler_thread = threading.Thread(target=run_scheduled_jobs, daemon=True)
+scheduler_thread.start()
+
+
 if __name__ == "__main__":
-    cleanup_uploads()
-    cleanup_chroma_db()
-    app.run(debug=True, use_reloader=False)
+    # cleanup_uploads()
+    # cleanup_chroma_db()
+    # app.run(debug=True, use_reloader=False)
+
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port, use_reloader=False)
