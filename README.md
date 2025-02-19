@@ -5,7 +5,7 @@
 ## Features
 
 *   **Multiple File Formats:** Supports uploading `.txt`, `.csv`, `.xlsx`, `.xls`, `.pdf`, `.doc`, `.docx`, `.jpg`, `.jpeg`, and `.png` files.
-*   **Automated OCR:** Performs Optical Character Recognition (OCR) on image files (JPEG, PNG) to extract text.
+*   **Automated OCR:** Performs Optical Character Recognition (OCR) on image files (JPEG, JPG, PNG) to extract text.
 *   **Flexible Document Loading:** Uses Langchain's document loaders (`TextLoader`, `CSVLoader`, `UnstructuredExcelLoader`, `UnstructuredWordDocumentLoader`, `PyPDFLoader`) to handle different file types.
 *   **Intelligent Text Splitting:** Employs `RecursiveCharacterTextSplitter` to divide documents into manageable chunks for the LLM, respecting sentence and paragraph boundaries.
 *   **Vector Database (ChromaDB):** Stores document embeddings in a ChromaDB vector database for efficient similarity search and context retrieval.
@@ -51,7 +51,7 @@ Here's a short demonstration of the chatbot in action:
     *   **Linux (Debian/Ubuntu):**  `sudo apt-get install tesseract-ocr`
     *   **Linux (Fedora/CentOS/RHEL):** `sudo yum install tesseract`
 
-*   **Microsoft Visual C++ Build Tools (Windows Only):**
+3.   **Microsoft Visual C++ Build Tools (Windows Only):**
         *   Download the installer from: [https://visualstudio.microsoft.com/visual-cpp-build-tools/](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
         *   Run the installer and select the "Desktop development with C++" workload.
         *   Ensure the following components are selected within the workload (in the "Individual components" tab):
@@ -60,20 +60,20 @@ Here's a short demonstration of the chatbot in action:
         *   Complete the installation and *restart your computer*.
 
     
-3.  **Create a Virtual Environment (Strongly Recommended):**
+4.  **Create a Virtual Environment (Strongly Recommended):**
 
     ```bash
     python3 -m venv venv
     source venv/bin/activate  # On Windows: venv\Scripts\activate
     ```
 
-4.  **Install Python Dependencies:**
+5.  **Install Python Dependencies:**
 
     ```bash
     pip install -r requirements.txt
     ```
 
-5.  **Set up Your Google API Key (Securely):**
+6.  **Set up Your Google API Key (Securely):**
 
     *   Obtain a Google API key.
     *   **Recommended Method (Using .env):**
