@@ -32,14 +32,16 @@ Here's a short demonstration of the chatbot in action:
 *   **Python 3.7+**
 *   **Tesseract OCR (for image processing):**  This is *not* a Python package.  See installation instructions below.
 *   **Google API Key:**  You'll need a Google API key with access to the Generative Language API and the embeddings API.
-
+*   **Microsoft Visual C++ Build Tools (Windows Only):** Required for building some Python package dependencies. See installation instructions below.
+  
 ## Installation
 
 1.  **Clone the Repository:**
 
     ```bash
     git clone https://github.com/Hercules45/RAG-Financial-Invoice-Chatbot.git
-    cd RAG-Financial-Invoice-Chatbot/RAG\ PROJECT
+    cd RAG-Financial-Invoice-Chatbot
+    cd RAG PROJECT
     ```
 
 2.  **Install Tesseract OCR (External Dependency):**
@@ -49,6 +51,15 @@ Here's a short demonstration of the chatbot in action:
     *   **Linux (Debian/Ubuntu):**  `sudo apt-get install tesseract-ocr`
     *   **Linux (Fedora/CentOS/RHEL):** `sudo yum install tesseract`
 
+*   **Microsoft Visual C++ Build Tools (Windows Only):**
+        *   Download the installer from: [https://visualstudio.microsoft.com/visual-cpp-build-tools/](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+        *   Run the installer and select the "Desktop development with C++" workload.
+        *   Ensure the following components are selected within the workload (in the "Individual components" tab):
+            *   MSVC v143 - VS 2022 C++ x64/x86 build tools (Latest)  (or a similar, recent version)
+            *   Windows 10 SDK (or Windows 11 SDK, if that's your OS)
+        *   Complete the installation and *restart your computer*.
+
+    
 3.  **Create a Virtual Environment (Strongly Recommended):**
 
     ```bash
@@ -77,10 +88,11 @@ Here's a short demonstration of the chatbot in action:
             .env
             venv/
             uploads/
+            chroma_db/
             ```
 
 
-## Running the Application
+## Running the Application (Locally)
 
 ```bash
 python app.py
@@ -110,5 +122,4 @@ The application will be available at `http://127.0.0.1:5000/` in your web browse
 *   **`uploads/`:**  Temporary storage for uploaded files (files are deleted after 24 hours).  **Note:** The `chroma_db` directory is created *inside* this `uploads` directory dynamically when a file is processed.
 *   **`assets/`:** Contains assets such as images and GIFs.
 *   **`requirements.txt`:**  Lists the required Python dependencies.
-*   **`.env`:** (Not provided here, but highly recommended) Stores environment variables (e.g., your Google API key).
-
+*   **`.env`:** (Not included in the repository) Stores your Google API key locally.
