@@ -13,7 +13,7 @@ unstructured
 openpyxl
 networkx
 tabulate
-python-magic-bin
+python-magic
 tiktoken
 gunicorn
 schedule
