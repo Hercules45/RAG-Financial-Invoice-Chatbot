@@ -281,7 +281,7 @@ def index():
                 if 'filename' in session:
                     bot_response = "Hello! I'm here to help with your financial invoice queries. What would you like to know about the uploaded invoice?"
                 else:
-                    bot_response = "Hello! I'm here to help with financial invoice analysis. Please upload an invoice file (text, CSV, Excel, image, or PDF) for me to analyze. What would you like to know?"
+                    bot_response = "Hello! I'm here to help with financial invoice analysis. Please upload an invoice file (text, CSV, Excel, Docx, Doc, image, or PDF) for me to analyze. What would you like to know?"
                 return jsonify({"bot_response": bot_response, "source_documents": []})
 
             if 'filename' not in session:
